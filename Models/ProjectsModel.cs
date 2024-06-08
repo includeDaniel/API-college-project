@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BD_BACK.Models
 {
-    public class Projects
+    public class ProjectsModel
     {
         [Key]
         public string Id { get; set; }
@@ -13,6 +13,6 @@ namespace BD_BACK.Models
 
         [ForeignKey("Clients")]
         public int Client_Id { get; set; }
-        public Clients Client { get; set; }
+        public ClientModel Client { get; set; }
     }
 }

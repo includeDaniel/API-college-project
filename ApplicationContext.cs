@@ -10,9 +10,9 @@ namespace BD_BACK
         : base(options)
         { }
 
-        public DbSet<Clients> Clients { get; set; }
-        public DbSet<ContactUs> ContactUs { get; set; }
-        public DbSet<Projects> Project { get; set; }
+        public DbSet<ClientModel> Clients { get; set; }
+        public DbSet<ContactUsModel> ContactUs { get; set; }
+        public DbSet<ProjectsModel> Project { get; set; }
 
 
         // The following configures EF to create a Sqlite database file in the
@@ -20,5 +20,9 @@ namespace BD_BACK
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($"Data Source=bdback.db");
 
+        internal Task<IEnumerable<ClientModel>> ToListAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

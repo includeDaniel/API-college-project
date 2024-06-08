@@ -1,6 +1,6 @@
 ﻿namespace BD_BACK.Models
 {
-    public class ContactUs
+    public class ContactUsModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace BD_BACK.Models
 {
-    public class Clients
+    public class ClientModel
     {
         [Key]
         public int Id { get; set; }
