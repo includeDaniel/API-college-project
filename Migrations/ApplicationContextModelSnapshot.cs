@@ -16,7 +16,7 @@ namespace BD_BACK.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
-            modelBuilder.Entity("BD_BACK.Models.Clients", b =>
+            modelBuilder.Entity("BD_BACK.Models.ClientModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,13 +35,17 @@ namespace BD_BACK.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("BD_BACK.Models.ContactUs", b =>
+            modelBuilder.Entity("BD_BACK.Models.ContactUsModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -54,10 +58,11 @@ namespace BD_BACK.Migrations
                     b.ToTable("ContactUs");
                 });
 
-            modelBuilder.Entity("BD_BACK.Models.Projects", b =>
+            modelBuilder.Entity("BD_BACK.Models.ProjectsModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("INTEGER");
@@ -83,9 +88,9 @@ namespace BD_BACK.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("BD_BACK.Models.Projects", b =>
+            modelBuilder.Entity("BD_BACK.Models.ProjectsModel", b =>
                 {
-                    b.HasOne("BD_BACK.Models.Clients", "Client")
+                    b.HasOne("BD_BACK.Models.ClientModel", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)

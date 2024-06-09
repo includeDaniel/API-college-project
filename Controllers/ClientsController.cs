@@ -1,12 +1,11 @@
 ﻿using BD_BACK.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
 
 namespace BD_BACK.Controllers
 {
 
-    [Route("api/Bd-Back")]
+    [Route("api/Bd-Back/Clients")]
     [ApiController]
     public class ClientsController : ControllerBase
     {
@@ -36,14 +35,14 @@ namespace BD_BACK.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IEnumerable> Put(ClientModel newClient)
+        public async Task<IEnumerable<ClientModel>> Put(ClientModel newClient)
         {
             DbSet.Update(newClient);
             return await DbSet.ToListAsync();
         }
 
         [HttpPost]
-        public async Task<IEnumerable> Add(ClientModel newClient)
+        public async Task<IEnumerable<ClientModel>> Add(ClientModel newClient)
         {
             DbSet.Add(newClient);
             await Db.SaveChangesAsync();
