@@ -25,7 +25,7 @@ namespace BD_BACK.Controllers
             return await DbSet.ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:guid}")]
         public async Task<IEnumerable<ProjectsModel>> Get(Guid id)
         {
             return await DbSet
@@ -34,13 +34,15 @@ namespace BD_BACK.Controllers
                 .ToListAsync();
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IEnumerable<ProjectsModel>> Put(ProjectsModel newClient)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ProjectsViewModel>> Put(ProjectsViewModel model)
         {
-            DbSet.Update(newClient);
-            return await DbSet.ToListAsync();
+            var projectModel = new ProjectsModel { Id = model.Id,ClientId = model.ClientId, Custom = model.Custom, Description = model.Description, Goal = model.Goal };
+            DbSet.Update( projectModel);
+            await Db.SaveChangesAsync();
+            return Ok(projectModel);
         }
-
+            
         [HttpPost]
         public async Task<ActionResult<ProjectsViewModel>> Add(RequestProjectViewModel model)
         {
@@ -51,11 +53,11 @@ namespace BD_BACK.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<IEnumerable<ProjectsModel>> Delete(Guid id)
+        public async Task<ActionResult<ProjectsViewModel>> Delete(Guid id)
         {
             DbSet.Remove(new ProjectsModel { Id = id });
             await Db.SaveChangesAsync();
-            return await DbSet.ToListAsync();
+            return Ok("Removido com Sucesso");
         }
     }
 }

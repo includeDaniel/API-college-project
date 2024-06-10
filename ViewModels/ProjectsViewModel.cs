@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BD_BACK.Models
+namespace BD_BACK.ViewModels
 {
     public class ProjectsViewModel
     {
