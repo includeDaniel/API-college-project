@@ -1,10 +1,11 @@
 ﻿using BD_BACK.Models;
+using BD_BACK.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BD_BACK.Controllers
 {
-    [Route("api/Bd-Back/Projects")]
+    [Route("api/Projects")]
     [ApiController]
     public class ProjectsController : ControllerBase
     {
@@ -25,7 +26,7 @@ namespace BD_BACK.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IEnumerable<ProjectsModel>> Get(int id)
+        public async Task<IEnumerable<ProjectsModel>> Get(Guid id)
         {
             return await DbSet
                 .AsNoTracking()
@@ -41,15 +42,16 @@ namespace BD_BACK.Controllers
         }
 
         [HttpPost]
-        public async Task<IEnumerable<ProjectsModel>> Add(ProjectsModel newClient)
+        public async Task<ActionResult<ProjectsViewModel>> Add(RequestProjectViewModel model)
         {
-            DbSet.Add(newClient);
+            var projectModel = new ProjectsModel { ClientId = model.ClientId, Custom = model.Custom, Description = model.Description, Goal = model.Goal };
+            DbSet.Add(projectModel);
             await Db.SaveChangesAsync();
-            return await DbSet.ToListAsync();
+            return Ok(projectModel);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IEnumerable<ProjectsModel>> Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<IEnumerable<ProjectsModel>> Delete(Guid id)
         {
             DbSet.Remove(new ProjectsModel { Id = id });
             await Db.SaveChangesAsync();

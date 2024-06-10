@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BD_BACK.Controllers
 {
 
-    [Route("api/Bd-Back/Clients")]
+    [Route("api/Clients")]
     [ApiController]
     public class ClientsController : ControllerBase
     {
@@ -22,11 +22,12 @@ namespace BD_BACK.Controllers
         [HttpGet]
         public async Task<IEnumerable<ClientModel>> All()
         {
-            return await DbSet.ToListAsync();
+
+            return await DbSet.AsNoTracking().Include(c => c.Projects).ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IEnumerable<ClientModel>> Get(int id)
+        [HttpGet("{id:guid}")]
+        public async Task<IEnumerable<ClientModel>> Get(Guid id)
         {
             return await DbSet
                 .AsNoTracking()
@@ -49,8 +50,8 @@ namespace BD_BACK.Controllers
             return await DbSet.ToListAsync();
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IEnumerable<ClientModel>> Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<IEnumerable<ClientModel>> Delete(Guid id)
         {
             DbSet.Remove(new ClientModel { Id = id });
             await Db.SaveChangesAsync();

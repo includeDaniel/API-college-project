@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace BD_BACK.Models
 {
-    public class ProjectsModel : Entity
+    public class ProjectsViewModel
     {
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
@@ -13,7 +14,5 @@ namespace BD_BACK.Models
         public bool Custom { get; set; }
         [Required]
         public Guid ClientId { get; set; }
-        [JsonIgnore]
-        public ClientModel Client { get; set; } = null!;
     }
 }

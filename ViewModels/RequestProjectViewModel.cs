@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
-namespace BD_BACK.Models
+namespace BD_BACK.ViewModels
 {
-    public class ProjectsModel : Entity
+    public class RequestProjectViewModel
     {
         [Required]
         public string Description { get; set; }
@@ -13,7 +12,5 @@ namespace BD_BACK.Models
         public bool Custom { get; set; }
         [Required]
         public Guid ClientId { get; set; }
-        [JsonIgnore]
-        public ClientModel Client { get; set; } = null!;
     }
 }

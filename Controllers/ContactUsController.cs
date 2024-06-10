@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BD_BACK.Controllers
 {
-    [Route("api/Bd-Back/ContactUs")]
+    [Route("api/ContactUs")]
     [ApiController]
     public class ContactUsController : ControllerBase
     {
@@ -24,8 +24,8 @@ namespace BD_BACK.Controllers
             return await DbSet.ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IEnumerable<ContactUsModel>> Get(int id)
+        [HttpGet("{id:guid}")]
+        public async Task<IEnumerable<ContactUsModel>> Get(Guid id)
         {
             return await DbSet
                 .AsNoTracking()
@@ -48,8 +48,8 @@ namespace BD_BACK.Controllers
             return await DbSet.ToListAsync();
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IEnumerable<ContactUsModel>> Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<IEnumerable<ContactUsModel>> Delete(Guid id)
         {
             DbSet.Remove(new ContactUsModel { Id = id });
             await Db.SaveChangesAsync();
