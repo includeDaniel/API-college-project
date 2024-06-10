@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains a .NET 8 API built with MVC architecture, utilizing PostgreSQL as the database. The project strictly adheres to SOLID principles and is designed for managing ToDo items.
+This repository contains a .NET 8 API built with MVC architecture, utilizing SQLite as the database. The project strictly adheres to SOLID principles and is designed for managing ToDo items.
 
 ## Features
 
