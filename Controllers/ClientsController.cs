@@ -1,4 +1,5 @@
 ﻿using BD_BACK.Models;
+using BD_BACK.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,27 +36,30 @@ namespace BD_BACK.Controllers
                 .ToListAsync();
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IEnumerable<ClientModel>> Put(ClientModel newClient)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ClientModel>> Put(ClientModel model)
         {
-            DbSet.Update(newClient);
-            return await DbSet.ToListAsync();
+            ClientModel Client = model;
+            DbSet.Update(Client);
+            await Db.SaveChangesAsync();
+            return Ok(Client);
         }
 
         [HttpPost]
-        public async Task<IEnumerable<ClientModel>> Add(ClientModel newClient)
+        public async Task<ActionResult<ClientViewModel>> Add(RequestClientViewModel model)
         {
+            var newClient = new ClientModel { Email = model.Email, Name = model.Name };
             DbSet.Add(newClient);
             await Db.SaveChangesAsync();
-            return await DbSet.ToListAsync();
+            return Ok(newClient);
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<IEnumerable<ClientModel>> Delete(Guid id)
+        public async Task<ActionResult<ClientModel>> Delete(Guid id)
         {
             DbSet.Remove(new ClientModel { Id = id });
             await Db.SaveChangesAsync();
-            return await DbSet.ToListAsync();
+            return Ok("Removido com Sucesso");
         }
     }
 
