@@ -6,9 +6,10 @@ This repository contains a .NET 8 API built with MVC architecture, utilizing SQL
 
 ## Features
 
-- architecture for modularity and maintainability.
 - Swagger for the interface.
 - SQLite.
+- CRUD
+- Relashionships
 
 ## Getting Started
 
